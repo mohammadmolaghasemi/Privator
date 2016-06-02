@@ -6,8 +6,8 @@ JSON = require('dkjson')
 HTTPS = require('ssl.https')
 dofile('utilities.lua')
 ----config----
-local bot_api_key = "" --BOT TOKEN تو کن ربات خود را در اینجا قرار دهید
-local You = 188548712  --ID ADMIN ایدی خود را اینجا قرار دهید
+local bot_api_key = "187085028:AAH9UdkDPH_uSlhTyYo9q5zHrM0UFcn0dQY"
+local You = 106164433
 local BASE_URL = "https://api.telegram.org/bot"..bot_api_key
 local BASE_FOLDER = ""
 local start = [[ ]]
@@ -17,7 +17,10 @@ local start = [[ ]]
 ----utilites----
 local help = [[
 ➖➖➖➖➖➖➖➖➖➖➖
+
 *commands:*`for admin`
+`/help` ✴️
+لیست راهنمایی
 `/ban` ✴️
 بن کردن یک شخص
 `/unban` ✴️
@@ -33,7 +36,8 @@ local help = [[
 `/id` ✴️
 ایدی
 ➖➖➖➖➖➖➖➖➖➖➖
-M.KH @cruel0098
+@wqwq2112
+@sbss_team
 ]]--
 -------
 
@@ -263,7 +267,7 @@ function bot_run()
 	if not ban then
 		ban = load_data('ban.db')
 	end
-	local bot_info = "Username = @"..bot.username.."\nName = "..bot.first_name.."\nID = "..bot.id.." \n[jon the cruel channel](https://telegram.me/joinchat/Cz0GaD5yj9_VLaNXOOg3ag)"
+	local bot_info = "Username = @"..bot.username.."\nName = "..bot.first_name.."\nID = "..bot.id.." \n[jon the sbssteam](https://telegram.me/joinchat/sbss_team)"
 
 	print(bot_info)
 	for k,v in pairs(add.id) do
@@ -329,7 +333,7 @@ msg.from.username = '@'..msg.from.username
 elseif msg.from.username == nil then
 msg.from.username = "you don't have"
 end
-local caption = 'your nam :- '..msg.from.first_name..'\nyour id :-'..msg.from.id..'\nyour username :- '..msg.from.username
+local caption = 'نام شما :- '..msg.from.first_name..'\nایدی شما :-'..msg.from.id..'\nیوزرنیم شما  :- '..msg.from.username
 
 	sendPhotoID(msg.chat.id,file,caption)
 elseif msg.text:match('/id (.*)$') then
@@ -363,7 +367,7 @@ user = bot.username
 else
 user = msg.from.username
 end
-local text = "سلام ["..msg.from.first_name.."](www.telegram.me/"..user..")\n\n[ربات خود را بسازید](http://opizo.com/3AGyRT)"
+local text = "سلام ["..msg.from.first_name.."](www.telegram.me/"..user..")\n\n[ربات خود را بسازید](http://telegram.me/sbss_team)"
 sendMessage(msg.chat.id,text.."\n"..start,true,false,true)
 elseif msg.text == "/start" and is_add(msg) then
  	print(#add.id)
@@ -373,7 +377,7 @@ user = bot.username
 else
 user = msg.from.username
 end
-local text = "سلام ["..msg.from.first_name.."](www.telegram.me/"..user..")\n\n[ربات خود را بسازید](http://opizo.com/3AGyRT)"
+local text = "سلام ["..msg.from.first_name.."](www.telegram.me/"..user..")\n\n[ربات خود را بسازید](http://telegram.me/sbss_team)"
 sendMessage(msg.chat.id,text.."\n"..start,true,false,true)
 elseif is_admin(msg) and msg.text == "/users" then
  	local r = tostring(#add.id)
@@ -409,14 +413,14 @@ end
 elseif msg.text ~= "/" then
 if is_admin(msg) and msg.reply_to_message and msg.reply_to_message.forward_from ~= nil and msg.text == "/ban" then
 table.insert(ban.id,msg.reply_to_message.forward_from.id)
-sendMessage(msg.reply_to_message.forward_from.id,"*YOU HAVE BEEN BANNED*",true,false,true)
+sendMessage(msg.reply_to_message.forward_from.id,"*شما به لیست ممنوعیت چت وارد شدید*",true,false,true)
 elseif is_admin(msg) and msg.reply_to_message and msg.reply_to_message.forward_from ~= nil and msg.text == "/unban" then
 for k, v in pairs(ban["id"]) do
 if ( v == msg.reply_to_message.forward_from.id ) then
 table.remove(ban["id"], k)
 end
 end
-sendMessage(msg.reply_to_message.forward_from.id,"*YOU HAVE BEEN unBANNED*",true,false,true)
+sendMessage(msg.reply_to_message.forward_from.id,"*شما از لیست ممنوعیت چت خارج شدید.*",true,false,true)
 elseif is_admin(msg) and msg.reply_to_message and msg.text == "/id" then
  if msg.reply_to_message.forward_from.last_name ~= nil then
  	 last_name = msg.reply_to_message.forward_from.last_name
@@ -424,11 +428,11 @@ elseif is_admin(msg) and msg.reply_to_message and msg.text == "/id" then
  	 last_name = ""
  end
  if msg.reply_to_message.forward_from.username ~= nil then
- 	 usernme = "\nUSERNAME : @"..msg.reply_to_message.forward_from.username
+ 	 usernme = "\nیوزرنیم : @"..msg.reply_to_message.forward_from.username
  else
  	 usernme = ""
  end
- local E = "NAME : "..msg.reply_to_message.forward_from.first_name.." "..last_name..usernme.."\nID :"..msg.reply_to_message.forward_from.id
+ local E = "نام : "..msg.reply_to_message.forward_from.first_name.." "..last_name..usernme.."\nایدی :"..msg.reply_to_message.forward_from.id
  sendMessage(msg.chat.id,E)
 
 elseif is_admin(msg) and msg.text == "/broadcast" then
